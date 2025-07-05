@@ -11,14 +11,11 @@
 // }
 
 // export default App
-
-
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route, Link, useParams, useNavigate } from "react-router-dom";
 import "./../styles/App.css";
 
 const App = () => {
-  // initial 8 products
   const [products, setProducts] = useState([
     { id: 1, name: "iPhone 13", description: "Apple smartphone with A15.", image: "https://via.placeholder.com/150", price: 999 },
     { id: 2, name: "Samsung Galaxy S22", description: "Samsung flagship.", image: "https://via.placeholder.com/150", price: 899 },
@@ -30,7 +27,6 @@ const App = () => {
     { id: 8, name: "Sony Xperia", description: "Multimedia power.", image: "https://via.placeholder.com/150", price: 799 }
   ]);
 
-  // CRUD functions
   const updateProduct = (updatedProduct) => {
     setProducts(products.map(p => p.id === updatedProduct.id ? updatedProduct : p));
   };
@@ -68,29 +64,29 @@ const App = () => {
 
 export default App;
 
-// ----------------------
-// Product List Component
 const ProductList = ({ products }) => {
   return (
     <div>
       <h2>Mobile Store</h2>
-      <div className="product-list">
-        {products.map(product => (
-          <div key={product.id}>
+      {products.map((product) => (
+        <div className="col-12" key={product.id}>
+          <div>
             <Link to={`/products/${product.id}`}>
-              <img src={product.image} alt={product.name} />
-              <h3>{product.name}</h3>
-              <p>${product.price}</p>
+              <div className="row">
+                <img src={product.image} alt={product.name} />
+                <div>
+                  <h3>{product.name}</h3>
+                  <p>${product.price}</p>
+                </div>
+              </div>
             </Link>
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
     </div>
   );
 };
 
-// ----------------------
-// Product Details Component
 const ProductDetails = ({ products }) => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -109,8 +105,6 @@ const ProductDetails = ({ products }) => {
   );
 };
 
-// ----------------------
-// Admin Panel Component
 const AdminPanel = ({ products, updateProduct, deleteProduct, addProduct }) => {
   const [form, setForm] = useState({ name: "", description: "", image: "", price: "" });
 
@@ -137,12 +131,17 @@ const AdminPanel = ({ products, updateProduct, deleteProduct, addProduct }) => {
       </div>
 
       {products.map((p, index) => (
-        <div key={p.id} style={{ margin: "20px 0" }}>
-          <img src={p.image} alt={p.name} width="50" /> 
-          <strong>{p.name}</strong> (${p.price})
+        <div key={p.id} className="col-12">
+          <div>
+            <a>
+              <div className="row">
+                <img src={p.image} alt={p.name} width="50" />
+                <strong>{p.name}</strong> (${p.price})
+              </div>
+            </a>
+          </div>
           <input className="form-control" type="number" value={p.price}
-            onChange={(e) => updateProduct({ ...p, price: Number(e.target.value) })}
-          />
+            onChange={(e) => updateProduct({ ...p, price: Number(e.target.value) })} />
           <button className="float-right" onClick={() => updateProduct(p)}>Save</button>
           <button className="float-right" onClick={() => deleteProduct(p.id)}>Delete</button>
         </div>

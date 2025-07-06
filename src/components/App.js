@@ -19,14 +19,14 @@ import "./../styles/App.css";
 
 const App = () => {
   const [products, setProducts] = useState([
-    { id: 1, name: "iPhone 13", description: "Apple smartphone with A15.", image: "https://placehold.co/150", price: 999 },
-    { id: 2, name: "Samsung Galaxy S22", description: "Samsung flagship.", image: "https://placehold.co/150", price: 899 },
-    { id: 3, name: "OnePlus 10", description: "Smooth OxygenOS.", image: "https://placehold.co/150", price: 749 },
-    { id: 4, name: "Google Pixel 6", description: "Best Android camera.", image: "https://placehold.co/150", price: 799 },
-    { id: 5, name: "Xiaomi 12", description: "Flagship killer.", image: "https://placehold.co/150", price: 699 },
-    { id: 6, name: "Realme GT", description: "Performance on budget.", image: "https://placehold.co/150", price: 599 },
-    { id: 7, name: "Moto Edge", description: "Clean Android.", image: "https://placehold.co/150", price: 549 },
-    { id: 8, name: "Sony Xperia", description: "Multimedia power.", image: "https://placehold.co/150", price: 799 }
+    { id: 1, name: "iPhone 13", description: "Apple smartphone with A15.", image: "/logo192.png", price: 999 },
+    { id: 2, name: "Samsung Galaxy S22", description: "Samsung flagship.", image: "/logo192.png", price: 899 },
+    { id: 3, name: "OnePlus 10", description: "Smooth OxygenOS.", image: "/logo192.png", price: 749 },
+    { id: 4, name: "Google Pixel 6", description: "Best Android camera.", image: "/logo192.png", price: 799 },
+    { id: 5, name: "Xiaomi 12", description: "Flagship killer.", image: "/logo192.png", price: 699 },
+    { id: 6, name: "Realme GT", description: "Performance on budget.", image: "/logo192.png", price: 599 },
+    { id: 7, name: "Moto Edge", description: "Clean Android.", image: "/logo192.png", price: 549 },
+    { id: 8, name: "Sony Xperia", description: "Multimedia power.", image: "/logo192.png", price: 799 }
   ]);
 
   const updateProduct = (updatedProduct) => {
@@ -139,12 +139,10 @@ const AdminPanel = ({ products, updateProduct, deleteProduct, addProduct }) => {
 
       {products.map((p, index) => (
         <div key={p.id} className="col-12">
-          <a>
-            <div className="row">
-              <img src={p.image} alt={p.name} width="50" />
-              <strong>{p.name}</strong> (${p.price})
-            </div>
-          </a>
+          <div className="row">
+            <img src={p.image} alt={p.name} width="50" />
+            <strong>{p.name}</strong> (${p.price})
+          </div>
           <input className="form-control" type="number" value={p.price}
             onChange={(e) => updateProduct({ ...p, price: Number(e.target.value) })} />
           <button className="float-right" onClick={() => updateProduct(p)}>Save</button>
@@ -154,4 +152,3 @@ const AdminPanel = ({ products, updateProduct, deleteProduct, addProduct }) => {
     </div>
   );
 };
-
